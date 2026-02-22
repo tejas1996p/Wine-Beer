@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --wine-burgundy: #722F37;
+    --gold: #C9A227;
+    --vintage-paper: #F5F0E8;
+    --vintage-dark: #1A1A1A;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #1A1A1A;
+    background-image: 
+      radial-gradient(ellipse at top, rgba(114, 47, 55, 0.1) 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, rgba(201, 162, 39, 0.05) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .vintage-card {
+    @apply bg-vintage-dark border border-wine-burgundy/30 rounded-lg overflow-hidden;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:border-gold/50 hover:shadow-lg hover:shadow-gold/10;
+  }
+
+  .vintage-button {
+    @apply px-6 py-3 font-accent uppercase tracking-wider;
+    @apply bg-gradient-to-r from-wine-burgundy to-wine-dark text-vintage-cream;
+    @apply border border-gold/30 rounded;
+    @apply transition-all duration-300;
+    @apply hover:from-gold hover:to-gold-dark hover:text-vintage-dark;
+    @apply hover:border-gold hover:shadow-lg hover:shadow-gold/20;
+  }
+
+  .gold-text {
+    @apply bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent;
+  }
+
+  .category-card {
+    @apply relative overflow-hidden rounded-xl;
+    @apply transition-all duration-500 ease-out;
+    @apply hover:scale-105 hover:shadow-2xl hover:shadow-gold/20;
+  }
+
+  .category-card::before {
+    @apply absolute inset-0 content-[''];
+    @apply bg-gradient-to-t from-vintage-dark/90 via-vintage-dark/40 to-transparent;
+    @apply transition-opacity duration-300;
+  }
+
+  .category-card:hover::before {
+    @apply from-wine-burgundy/80;
+  }
+
+  .product-image {
+    @apply transition-transform duration-500 ease-out;
+    @apply hover:scale-110;
+  }
+
+  .nav-link {
+    @apply relative text-vintage-cream/80 hover:text-gold;
+    @apply transition-colors duration-300;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gold;
+    @apply content-[''] transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-vintage-dark border border-wine-burgundy/50;
+    @apply text-vintage-cream placeholder:text-vintage-cream/40;
+    @apply rounded focus:border-gold focus:ring-1 focus:ring-gold/50;
+    @apply transition-all duration-300 outline-none;
+  }
+
+  .select-field {
+    @apply w-full px-4 py-3 bg-vintage-dark border border-wine-burgundy/50;
+    @apply text-vintage-cream rounded;
+    @apply focus:border-gold focus:ring-1 focus:ring-gold/50;
+    @apply transition-all duration-300 outline-none cursor-pointer;
+  }
+}
+
+@layer utilities {
+  .text-shadow-gold {
+    text-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #722F37 #1A1A1A;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: #1A1A1A;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #722F37;
+    border-radius: 4px;
+  }
+}
