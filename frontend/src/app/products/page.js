@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -8,7 +8,7 @@ import ProductGrid from '@/components/ProductGrid';
 import { getProducts, getCategories } from '@/lib/api';
 import { SlidersHorizontal, X } from 'lucide-react';
 
-export default function ProductsPage() {
+function ProductsContent() {
   const searchParams = useSearchParams();
   const initialPage = parseInt(searchParams.get('page')) || 1;
   
@@ -55,7 +55,6 @@ export default function ProductsPage() {
         ...filters,
       };
       
-      // Remove empty filters
       Object.keys(params).forEach(key => {
         if (!params[key]) delete params[key];
       });
@@ -94,7 +93,6 @@ export default function ProductsPage() {
       
       <div className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="mb-8">
             <h1 className="font-display text-4xl text-vintage-cream mb-2">
               All <span className="gold-text">Products</span>
@@ -105,7 +103,6 @@ export default function ProductsPage() {
           </div>
 
           <div className="flex flex-col lg:flex-row gap-8">
-            {/* Mobile Filter Toggle */}
             <button
               className="lg:hidden flex items-center gap-2 px-4 py-2 border border-wine-burgundy/50 rounded text-vintage-cream"
               onClick={() => setShowFilters(!showFilters)}
@@ -114,7 +111,6 @@ export default function ProductsPage() {
               Filters
             </button>
 
-            {/* Filters Sidebar */}
             <aside className={`lg:w-64 ${showFilters ? 'block' : 'hidden'} lg:block`}>
               <div className="bg-vintage-dark/50 border border-wine-burgundy/30 rounded-lg p-6 sticky top-24">
                 <div className="flex items-center justify-between mb-6">
@@ -130,7 +126,6 @@ export default function ProductsPage() {
                   )}
                 </div>
 
-                {/* Category Filter */}
                 <div className="mb-6">
                   <label className="text-vintage-cream/70 text-sm mb-2 block">Category</label>
                   <select
@@ -145,7 +140,6 @@ export default function ProductsPage() {
                   </select>
                 </div>
 
-                {/* Price Range */}
                 <div className="mb-6">
                   <label className="text-vintage-cream/70 text-sm mb-2 block">Price Range</label>
                   <div className="flex gap-2">
@@ -166,7 +160,6 @@ export default function ProductsPage() {
                   </div>
                 </div>
 
-                {/* Country Filter */}
                 <div className="mb-6">
                   <label className="text-vintage-cream/70 text-sm mb-2 block">Country</label>
                   <select
@@ -181,7 +174,6 @@ export default function ProductsPage() {
                   </select>
                 </div>
 
-                {/* Sort */}
                 <div className="mb-6">
                   <label className="text-vintage-cream/70 text-sm mb-2 block">Sort By</label>
                   <select
@@ -199,7 +191,6 @@ export default function ProductsPage() {
               </div>
             </aside>
 
-            {/* Products Grid */}
             <div className="flex-1">
               {loading ? (
                 <div className="flex items-center justify-center py-20">
@@ -219,5 +210,19 @@ export default function ProductsPage() {
 
       <Footer />
     </main>
+  );
+}
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <main className="min-h-screen bg-vintage-dark">
+        <div className="pt-24 flex items-center justify-center py-20">
+          <div className="w-12 h-12 border-4 border-gold/30 border-t-gold rounded-full animate-spin" />
+        </div>
+      </main>
+    }>
+      <ProductsContent />
+    </Suspense>
   );
 }

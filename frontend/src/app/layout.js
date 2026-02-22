@@ -1,5 +1,6 @@
 import { Playfair_Display, Inter, Cinzel } from 'next/font/google';
 import './globals.css';
+import ScrollProgress from '@/components/ScrollProgress';
 
 const playfair = Playfair_Display({ 
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${playfair.variable} ${inter.variable} ${cinzel.variable} font-body bg-vintage-dark text-vintage-cream`}>
+        <ScrollProgress />
         {children}
       </body>
     </html>
