@@ -1,12 +1,30 @@
 'use client';
 
+/* ============================================
+   COMPONENT IMPORTS
+   ============================================ */
 import ProductCard from './ProductCard';
+
+/* ============================================
+   LUCIDE REACT - Icons
+   ============================================ */
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+/* ============================================
+   NEXT.JS - Routing
+   ============================================ */
 import Link from 'next/link';
 
+/* ============================================
+   PRODUCT GRID COMPONENT - Display products with pagination
+   ============================================ */
 export default function ProductGrid({ products, pagination, currentCategory }) {
+  /* Extract pagination data with defaults */
   const { page, limit, total, pages } = pagination || { page: 1, limit: 20, total: 0, pages: 0 };
 
+  /* ============================================
+     EMPTY STATE - No products found
+     ============================================ */
   if (!products || products.length === 0) {
     return (
       <div className="text-center py-20">
@@ -20,7 +38,9 @@ export default function ProductGrid({ products, pagination, currentCategory }) {
 
   return (
     <div>
-      {/* Results Count */}
+      /* ============================================
+         RESULTS COUNT - Showing X-Y of Z products
+         ============================================ */
       <div className="flex items-center justify-between mb-8">
         <p className="text-vintage-cream/60">
           Showing {((page - 1) * limit) + 1} - {Math.min(page * limit, total)} of {total} products
@@ -32,16 +52,21 @@ export default function ProductGrid({ products, pagination, currentCategory }) {
         )}
       </div>
 
-      {/* Product Grid */}
+      /* ============================================
+         PRODUCT GRID - Grid of product cards
+         ============================================ */
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {products.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
 
-      {/* Pagination */}
+      /* ============================================
+         PAGINATION - Page navigation
+         ============================================ */
       {pages > 1 && (
         <div className="flex items-center justify-center gap-2 mt-12">
+          /* Previous page button
           <Link
             href={page > 1 ? `?page=${page - 1}` : '#'}
             className={`p-3 rounded border border-wine-burgundy/50 transition-colors ${
@@ -53,6 +78,7 @@ export default function ProductGrid({ products, pagination, currentCategory }) {
             <ChevronLeft className="w-5 h-5" />
           </Link>
 
+          /* Page numbers - Show up to 5 pages
           {Array.from({ length: Math.min(5, pages) }, (_, i) => {
             let pageNum;
             if (pages <= 5) {
@@ -80,6 +106,7 @@ export default function ProductGrid({ products, pagination, currentCategory }) {
             );
           })}
 
+          /* Next page button
           <Link
             href={page < pages ? `?page=${page + 1}` : '#'}
             className={`p-3 rounded border border-wine-burgundy/50 transition-colors ${

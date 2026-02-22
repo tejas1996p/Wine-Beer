@@ -1,13 +1,24 @@
+/* ============================================
+   NEXT.JS & LUCIDE - Routing and icons
+   ============================================ */
 import Link from 'next/link';
 import { Wine, Mail, Phone, MapPin } from 'lucide-react';
 
+/* ============================================
+   FOOTER COMPONENT - Site footer with links and contact info
+   ============================================ */
 export default function Footer() {
   return (
     <footer className="bg-vintage-dark border-t border-wine-burgundy/30 mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        /* Grid layout for footer sections */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-          {/* Brand */}
+          
+          /* ============================================
+             BRAND SECTION - Company info and description
+             ============================================ */
           <div>
+            /* Logo with wine icon
             <div className="flex items-center space-x-2 mb-6">
               <Wine className="w-8 h-8 text-gold" />
               <div>
@@ -15,13 +26,16 @@ export default function Footer() {
                 <span className="font-display text-lg text-vintage-cream block">SPIRITS</span>
               </div>
             </div>
+            /* Company description */
             <p className="text-vintage-cream/60 text-sm leading-relaxed">
               Your premier destination for fine wines, craft beers, and premium spirits. 
               Curated selections from the world&apos;s finest vineyards and distilleries.
             </p>
           </div>
 
-          {/* Quick Links */}
+          /* ============================================
+             QUICK LINKS SECTION - Navigation links
+             ============================================ */
           <div>
             <h3 className="font-accent text-gold text-sm uppercase tracking-widest mb-6">
               Quick Links
@@ -40,7 +54,9 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Categories */}
+          /* ============================================
+             CATEGORIES SECTION - Product category links
+             ============================================ */
           <div>
             <h3 className="font-accent text-gold text-sm uppercase tracking-widest mb-6">
               Categories
@@ -59,20 +75,25 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact */}
+          /* ============================================
+             CONTACT SECTION - Contact information
+             ============================================ */
           <div>
             <h3 className="font-accent text-gold text-sm uppercase tracking-widest mb-6">
               Contact Us
             </h3>
             <ul className="space-y-4">
+              /* Address */
               <li className="flex items-center space-x-3 text-vintage-cream/70 text-sm">
                 <MapPin className="w-4 h-4 text-gold" />
                 <span>123 Vintage Lane, Wine Country, CA 94558</span>
               </li>
+              /* Phone */
               <li className="flex items-center space-x-3 text-vintage-cream/70 text-sm">
                 <Phone className="w-4 h-4 text-gold" />
                 <span>(555) 123-4567</span>
               </li>
+              /* Email */
               <li className="flex items-center space-x-3 text-vintage-cream/70 text-sm">
                 <Mail className="w-4 h-4 text-gold" />
                 <span>info@vintagespirits.com</span>
@@ -81,7 +102,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar */}
+        /* ============================================
+           BOTTOM BAR - Copyright and legal notice
+           ============================================ */
         <div className="border-t border-wine-burgundy/30 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-vintage-cream/50 text-sm">
             &copy; {new Date().getFullYear()} Vintage Spirits. All rights reserved.

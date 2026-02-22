@@ -1,8 +1,13 @@
+/* Tailwind CSS - Utility-first CSS framework */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* ============================================
+   BASE STYLES - Global resets and custom properties
+   ============================================ */
 @layer base {
+  /* CSS Custom Properties - Design tokens for colors */
   :root {
     --wine-burgundy: #722F37;
     --gold: #C9A227;
@@ -10,10 +15,12 @@
     --vintage-dark: #1A1A1A;
   }
 
+  /* Smooth scrolling for anchor links */
   html {
     scroll-behavior: smooth;
   }
 
+  /* Global body styles - Background gradient effect */
   body {
     background-color: #1A1A1A;
     background-image: 
@@ -23,13 +30,18 @@
   }
 }
 
+/* ============================================
+   COMPONENT STYLES - Reusable UI components
+   ============================================ */
 @layer components {
+  /* Vintage Card - Product/card container with hover effects */
   .vintage-card {
     @apply bg-vintage-dark border border-wine-burgundy/30 rounded-lg overflow-hidden;
     @apply transition-all duration-300 ease-out;
     @apply hover:border-gold/50 hover:shadow-lg hover:shadow-gold/10;
   }
 
+  /* Vintage Button - Primary CTA button with gradient */
   .vintage-button {
     @apply px-6 py-3 font-accent uppercase tracking-wider;
     @apply bg-gradient-to-r from-wine-burgundy to-wine-dark text-vintage-cream;
@@ -39,45 +51,54 @@
     @apply hover:border-gold hover:shadow-lg hover:shadow-gold/20;
   }
 
+  /* Gold Text - Gradient text effect for headings */
   .gold-text {
     @apply bg-gradient-to-r from-gold via-gold-light to-gold bg-clip-text text-transparent;
   }
 
+  /* Category Card - Category navigation card with hover animation */
   .category-card {
     @apply relative overflow-hidden rounded-xl;
     @apply transition-all duration-500 ease-out;
     @apply hover:scale-105 hover:shadow-2xl hover:shadow-gold/20;
   }
 
+  /* Category Card Overlay - Gradient overlay on category cards */
   .category-card::before {
     @apply absolute inset-0 content-[''];
     @apply bg-gradient-to-t from-vintage-dark/90 via-vintage-dark/40 to-transparent;
     @apply transition-opacity duration-300;
   }
 
+  /* Category Card Hover State - Change overlay on hover */
   .category-card:hover::before {
     @apply from-wine-burgundy/80;
   }
 
+  /* Product Image - Zoom effect on hover */
   .product-image {
     @apply transition-transform duration-500 ease-out;
     @apply hover:scale-110;
   }
 
+  /* Navigation Link - Top navigation menu items */
   .nav-link {
     @apply relative text-vintage-cream/80 hover:text-gold;
     @apply transition-colors duration-300;
   }
 
+  /* Navigation Link Underline - Animated underline effect */
   .nav-link::after {
     @apply absolute bottom-0 left-0 w-0 h-0.5 bg-gold;
     @apply content-[''] transition-all duration-300;
   }
 
+  /* Navigation Link Hover - Expand underline */
   .nav-link:hover::after {
     @apply w-full;
   }
 
+  /* Input Field - Text input styling */
   .input-field {
     @apply w-full px-4 py-3 bg-vintage-dark border border-wine-burgundy/50;
     @apply text-vintage-cream placeholder:text-vintage-cream/40;
@@ -85,6 +106,7 @@
     @apply transition-all duration-300 outline-none;
   }
 
+  /* Select Field - Dropdown select styling */
   .select-field {
     @apply w-full px-4 py-3 bg-vintage-dark border border-wine-burgundy/50;
     @apply text-vintage-cream rounded;
@@ -93,16 +115,22 @@
   }
 }
 
+/* ============================================
+   UTILITY STYLES - Helper classes
+   ============================================ */
 @layer utilities {
+  /* Gold Text Shadow - Glow effect for gold text */
   .text-shadow-gold {
     text-shadow: 0 0 20px rgba(201, 162, 39, 0.3);
   }
   
+  /* Custom Scrollbar - Thin styled scrollbar */
   .scrollbar-thin {
     scrollbar-width: thin;
     scrollbar-color: #722F37 #1A1A1A;
   }
   
+  /* Webkit Scrollbar Track - Background of scrollbar */
   .scrollbar-thin::-webkit-scrollbar {
     width: 8px;
   }
@@ -111,6 +139,7 @@
     background: #1A1A1A;
   }
   
+  /* Webkit Scrollbar Thumb - Draggable part of scrollbar */
   .scrollbar-thin::-webkit-scrollbar-thumb {
     background: #722F37;
     border-radius: 4px;
