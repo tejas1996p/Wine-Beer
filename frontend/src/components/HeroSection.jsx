@@ -112,7 +112,7 @@ export default function HeroSection() {
             <ArrowRight className="w-5 h-5" />
           </Link>
           <Link 
-            href="/category/red-wine" 
+            href="/featured" 
             className="px-6 py-3 font-accent uppercase tracking-wider border border-gold/30 text-vintage-cream rounded hover:border-gold hover:text-gold transition-all duration-300"
           >
             Featured Wines
@@ -169,23 +169,6 @@ export default function HeroSection() {
         </motion.div>
       </motion.div>
 
-      {/* Scroll Indicator */}
-      <motion.div 
-        style={{ opacity }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gold/30 rounded-full flex justify-center pt-2"
-        >
-          <motion.div 
-            animate={{ opacity: [1, 0.3, 1] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1 h-2 bg-gold rounded-full" 
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }

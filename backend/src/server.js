@@ -215,6 +215,28 @@ app.get('/api/products/search', async (req, res) => {
     }
 });
 
+app.get('/api/featured', async (req, res) => {
+    try {
+        const { limit = 20 } = req.query;
+        
+        const [rows] = await pool.query(
+            `SELECT * FROM products 
+             WHERE category IN ('Red Wine', 'White Wine', 'Rosé Wine', 'Sparkling Wine')
+             ORDER BY RAND() 
+             LIMIT ?`,
+            [parseInt(limit)]
+        );
+
+        res.json({
+            products: rows,
+            total: rows.length
+        });
+    } catch (error) {
+        console.error('Error fetching featured wines:', error);
+        res.status(500).json({ error: 'Failed to fetch featured wines' });
+    }
+});
+
 app.get('/api/stats', async (req, res) => {
     try {
         const [categories] = await pool.query(`

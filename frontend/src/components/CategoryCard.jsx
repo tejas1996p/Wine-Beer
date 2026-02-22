@@ -11,11 +11,11 @@ const categoryImages = {
   'sparkling-wine': 'https://images.unsplash.com/photo-1594372365401-3b5ff14eaaed?w=600',
   'beer': 'https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600',
   'whiskey': 'https://images.unsplash.com/photo-1527281400683-1aae777175f8?w=600',
-  'rum': 'https://images.unsplash.com/photo-1614680023167-27d7d4a5bc2a?w=600',
+  'rum': 'https://images.unsplash.com/photo-1569529465841-dfecdab7503b?w=600',
   'vodka': 'https://images.unsplash.com/photo-1613063087250-333946d01332?w=600',
-  'gin': 'https://images.unsplash.com/photo-1608885898957-a97c01a48fda?w=600',
+  'gin': 'https://images.unsplash.com/photo-1471115853179-bb1d604434e0?w=600',
   'tequila': 'https://images.unsplash.com/photo-1618453292485-6806f15e0e34?w=600',
-  'brandy': 'https://images.unsplash.com/photo-1602632214858-93366c0c2c4e?w=600',
+  'brandy': 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600',
   'sake': 'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=600',
 };
 

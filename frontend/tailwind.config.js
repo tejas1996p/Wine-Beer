@@ -31,6 +31,7 @@ module.exports = {
         'vintage-dark': '#1A1A1A',
         'vintage-cream': '#FDF8E8',
         'vintage-paper': '#F5F0E8',
+        'silver': '#C0C0C0',
       },
       fontFamily: {
         display: ['Playfair Display', 'serif'],
