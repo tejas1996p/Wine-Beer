@@ -53,13 +53,11 @@ function SearchContent() {
       
       <div className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Search Header */}
           <div className="mb-8">
             <h1 className="font-display text-4xl text-vintage-cream mb-4">
               Search <span className="gold-text">Products</span>
             </h1>
             
-            {/* Search Form */}
             <form onSubmit={handleSearch} className="max-w-2xl">
               <div className="relative">
                 <input
@@ -79,7 +77,6 @@ function SearchContent() {
             </form>
           </div>
 
-          {/* Results */}
           {query && (
             <div>
               <p className="text-vintage-cream/60 mb-6">

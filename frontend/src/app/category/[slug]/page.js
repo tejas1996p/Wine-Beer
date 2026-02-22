@@ -63,7 +63,6 @@ function CategoryContent() {
     <main className="min-h-screen">
       <Navbar />
       
-      {/* Hero Banner */}
       <div className="relative h-64 md:h-80 overflow-hidden mt-20">
         <div 
           className="absolute inset-0 bg-cover bg-center"
@@ -92,7 +91,6 @@ function CategoryContent() {
         </div>
       </div>
 
-      {/* Products Section */}
       <div className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {loading ? (

@@ -1,13 +1,13 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProductCard from '@/components/ProductCard';
-import { getProductById, getProducts, getCategories } from '@/lib/api';
+import { getProductById, getProducts } from '@/lib/api';
 import { ShoppingCart, Heart, ChevronRight, Star, Truck, Shield, RotateCcw } from 'lucide-react';
 
 function ProductContent() {
@@ -26,18 +26,16 @@ function ProductContent() {
   const fetchProductData = async () => {
     setLoading(true);
     try {
-      const [productData, productsData, categoriesData] = await Promise.all([
+      const [productData, related] = await Promise.all([
         getProductById(id),
-        getProducts({ limit: 4, category: '' }),
-        getCategories()
+        productData.category ? getProducts({ limit: 4, category: productData.category }) : Promise.resolve({ products: [] })
       ]);
       
       setProduct(productData);
       
-      // Get related products from same category
       if (productData.category) {
-        const related = await getProducts({ limit: 4, category: productData.category });
-        setRelatedProducts(related.products.filter(p => p.id !== parseInt(id)).slice(0, 4));
+        const relatedData = await getProducts({ limit: 4, category: productData.category });
+        setRelatedProducts(relatedData.products.filter(p => p.id !== parseInt(id)).slice(0, 4));
       }
     } catch (error) {
       console.error('Error fetching product:', error);
@@ -76,7 +74,6 @@ function ProductContent() {
       
       <div className="pt-24 pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-vintage-cream/60 text-sm mb-8">
             <Link href="/" className="hover:text-gold">Home</Link>
             <ChevronRight className="w-4 h-4" />
@@ -89,9 +86,7 @@ function ProductContent() {
             <span className="text-gold truncate max-w-[200px]">{product.product_name}</span>
           </nav>
 
-          {/* Product Details */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
-            {/* Image */}
             <div className="relative aspect-[3/4] bg-vintage-dark/50 rounded-xl overflow-hidden border border-wine-burgundy/30">
               <Image
                 src={product.image_url || 'https://placehold.co/600x800/722F37/FEFEFE?text=Product'}
@@ -107,14 +102,12 @@ function ProductContent() {
               )}
             </div>
 
-            {/* Info */}
             <div>
               <p className="text-gold text-sm uppercase tracking-wider mb-2">{product.brand_name}</p>
               <h1 className="font-display text-3xl md:text-4xl text-vintage-cream mb-4">
                 {product.product_name}
               </h1>
               
-              {/* Rating */}
               <div className="flex items-center gap-2 mb-4">
                 <div className="flex gap-0.5">
                   {[1, 2, 3, 4, 5].map((star) => (
@@ -127,14 +120,12 @@ function ProductContent() {
                 <span className="text-vintage-cream/60 text-sm">(42 reviews)</span>
               </div>
 
-              {/* Price */}
               <div className="mb-6">
                 <span className="font-display text-4xl gold-text font-bold">
                   ${Number(product.price).toFixed(2)}
                 </span>
               </div>
 
-              {/* Description */}
               <div className="mb-8">
                 <h3 className="font-accent text-gold text-sm uppercase tracking-widest mb-3">
                   Description
@@ -144,7 +135,6 @@ function ProductContent() {
                 </p>
               </div>
 
-              {/* Details */}
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-vintage-dark/50 p-4 rounded border border-wine-burgundy/30">
                   <p className="text-vintage-cream/50 text-xs uppercase mb-1">Category</p>
@@ -182,7 +172,6 @@ function ProductContent() {
                 </div>
               </div>
 
-              {/* Quantity & Add to Cart */}
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
                 <div className="flex items-center border border-wine-burgundy/50 rounded">
                   <button
@@ -210,7 +199,6 @@ function ProductContent() {
                 </button>
               </div>
 
-              {/* Features */}
               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-wine-burgundy/30">
                 <div className="text-center">
                   <Truck className="w-5 h-5 text-gold mx-auto mb-2" />
@@ -228,7 +216,6 @@ function ProductContent() {
             </div>
           </div>
 
-          {/* Related Products */}
           {relatedProducts.length > 0 && (
             <div>
               <h2 className="font-display text-2xl text-vintage-cream mb-8">

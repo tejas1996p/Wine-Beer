@@ -1,19 +1,9 @@
 'use client';
 
-/* ============================================
-   NEXT.JS & REACT - Image handling and routing
-   ============================================ */
 import Image from 'next/image';
 import Link from 'next/link';
-
-/* ============================================
-   FRAMER MOTION - Animation library
-   ============================================ */
 import { motion } from 'framer-motion';
 
-/* ============================================
-   CATEGORY IMAGES - Mapping of category slugs to image URLs
-   ============================================ */
 const categoryImages = {
   'red-wine': 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600',
   'white-wine': 'https://images.unsplash.com/photo-1474722883778-792e7990302f?w=600',
@@ -29,25 +19,16 @@ const categoryImages = {
   'sake': 'https://images.unsplash.com/photo-1588196749597-9ff075ee6b5b?w=600',
 };
 
-/* ============================================
-   CATEGORY CARD COMPONENT - Display category with image
-   ============================================ */
 export default function CategoryCard({ category }) {
-  /* Get image URL from mapping or use fallback */
   const imageUrl = categoryImages[category.slug] || 'https://placehold.co/600x400/722F37/FEFEFE?text=Category';
 
   return (
-    /* Link to category page */
     <Link href={`/category/${category.slug}`} className="category-card block">
-      /* Card container with hover animation */
       <motion.div 
         whileHover={{ y: -8 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
         className="relative h-64 md:h-80 overflow-hidden rounded-lg"
       >
-        /* ============================================
-           IMAGE SECTION - Category image with zoom on hover
-           ============================================ */
         <motion.div
           whileHover={{ scale: 1.1 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
@@ -62,28 +43,19 @@ export default function CategoryCard({ category }) {
           />
         </motion.div>
         
-        /* ============================================
-           OVERLAY - Gradient overlay for text readability
-           ============================================ */
         <div className="absolute inset-0 bg-gradient-to-t from-vintage-dark via-vintage-dark/40 to-transparent" />
         
-        /* ============================================
-           CONTENT - Category name and description
-           ============================================ */
         <div className="absolute bottom-0 left-0 right-0 p-6">
-          /* Category title */
           <motion.h3 
             className="font-display text-2xl text-vintage-cream mb-2"
           >
             {category.name}
           </motion.h3>
-          /* Category description if available */
           {category.description && (
             <p className="text-vintage-cream/70 text-sm line-clamp-2">
               {category.description}
             </p>
           )}
-          /* Explore link with animated underline */
           <motion.span 
             initial={{ opacity: 0.7 }}
             whileHover={{ opacity: 1 }}

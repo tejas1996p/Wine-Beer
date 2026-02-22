@@ -1,34 +1,15 @@
 'use client';
 
-/* ============================================
-   COMPONENT IMPORTS
-   ============================================ */
 import Navbar from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import CategoryCard from '@/components/CategoryCard';
 import Footer from '@/components/Footer';
-
-/* ============================================
-   ANIMATION IMPORTS - Scroll animation components
-   ============================================ */
 import { FadeIn, StaggerContainer, StaggerItem, AnimatedBackground } from '@/components/ScrollAnimation';
-
-/* ============================================
-   API IMPORTS - Data fetching functions
-   ============================================ */
 import { getCategories, getProducts } from '@/lib/api';
-
-/* ============================================
-   NEXT.JS - Link component
-   ============================================ */
 import Link from 'next/link';
 
-/* ============================================
-   DATA FETCHING - Server-side data loading
-   ============================================ */
 async function getData() {
   try {
-    /* Fetch categories and products in parallel */
     const [categories, productsData] = await Promise.all([
       getCategories(),
       getProducts({ limit: 8 })
@@ -40,27 +21,17 @@ async function getData() {
   }
 }
 
-/* ============================================
-   HOME PAGE - Main landing page
-   ============================================ */
 export default async function HomePage() {
-  /* Fetch data on server side */
   const { categories, products } = await getData();
 
   return (
     <main className="min-h-screen relative">
-      /* Animated background orbs
       <AnimatedBackground />
       
-      // Navigation bar
       <Navbar />
       
-      // Hero section with main banner
       <HeroSection />
 
-      /* ============================================
-         CATEGORIES SECTION - Browse by category
-         ============================================ */
       <section className="py-20 bg-vintage-dark relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
@@ -75,7 +46,6 @@ export default async function HomePage() {
             </div>
           </FadeIn>
 
-          /* Category grid with staggered animation
           <StaggerContainer delay={0.1}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {categories.slice(0, 8).map((category) => (
@@ -88,9 +58,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      /* ============================================
-         FEATURED PRODUCTS SECTION - Highlight products
-         ============================================ */
       <section className="py-20 bg-gradient-to-b from-vintage-dark to-vintage-dark/95 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
@@ -104,7 +71,6 @@ export default async function HomePage() {
             </div>
           </FadeIn>
 
-          /* Product grid with staggered animation
           <StaggerContainer delay={0.1}>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {products.slice(0, 8).map((product) => (
@@ -120,7 +86,6 @@ export default async function HomePage() {
                             className="object-contain h-full w-full product-image"
                           />
                         </div>
-                        /* ABV badge if available
                         {product.abv && (
                           <div className="absolute top-3 left-3 px-2 py-1 bg-gold/20 backdrop-blur-sm rounded text-gold text-xs">
                             {product.abv}% ABV
@@ -157,9 +122,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      /* ============================================
-         NEWSLETTER SECTION - Email subscription
-         ============================================ */
       <section className="py-20 bg-gradient-to-r from-wine-burgundy/20 via-vintage-dark to-gold/10 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
@@ -170,7 +132,6 @@ export default async function HomePage() {
               <p className="text-vintage-cream/60 mb-8">
                 Subscribe to receive exclusive offers, new arrivals, and expert recommendations.
               </p>
-              /* Newsletter signup form
               <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
                 <input
                   type="email"
@@ -186,7 +147,6 @@ export default async function HomePage() {
         </div>
       </section>
 
-      // Footer
       <Footer />
     </main>
   );

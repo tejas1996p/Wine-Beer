@@ -1,36 +1,15 @@
 'use client';
 
-/* ============================================
-   NEXT.JS & REACT - Routing and state management
-   ============================================ */
 import Link from 'next/link';
-
-/* ============================================
-   LUCIDE REACT - Icon library
-   ============================================ */
 import { Search, ShoppingCart, User, Menu, X } from 'lucide-react';
-
-/* ============================================
-   REACT HOOKS - State management
-   ============================================ */
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-/* ============================================
-   NAVBAR COMPONENT - Fixed top navigation bar
-   ============================================ */
 export default function Navbar() {
-  /* State for mobile menu toggle */
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  /* State for search input */
   const [searchQuery, setSearchQuery] = useState('');
-  /* Router for navigation */
   const router = useRouter();
 
-  /* ============================================
-     EVENT HANDLERS
-     ============================================ */
-  /* Handle search form submission */
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -39,14 +18,10 @@ export default function Navbar() {
   };
 
   return (
-    /* Navigation container - fixed at top with backdrop blur */
     <nav className="fixed top-0 left-0 right-0 z-50 bg-vintage-dark/95 backdrop-blur-md border-b border-wine-burgundy/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          /* ============================================
-             LOGO SECTION
-             ============================================ */
           <Link href="/" className="flex items-center space-x-2">
             <span className="font-accent text-2xl gold-text font-bold tracking-wider">
               VINTAGE
@@ -56,9 +31,6 @@ export default function Navbar() {
             </span>
           </Link>
 
-          /* ============================================
-             DESKTOP NAVIGATION - Hidden on mobile
-             ============================================ */
           <div className="hidden md:flex items-center space-x-8">
             <Link href="/products" className="nav-link font-body text-sm uppercase tracking-widest">
               All Products
@@ -77,11 +49,7 @@ export default function Navbar() {
             </Link>
           </div>
 
-          /* ============================================
-             SEARCH AND ICONS SECTION
-             ============================================ */
           <div className="flex items-center space-x-4">
-            /* Search form - hidden on smaller screens */
             <form onSubmit={handleSearch} className="hidden lg:flex items-center">
               <div className="relative">
                 <input
@@ -95,11 +63,9 @@ export default function Navbar() {
               </div>
             </form>
 
-            /* User account icon */
             <button className="p-2 hover:text-gold transition-colors">
               <User className="w-5 h-5" />
             </button>
-            /* Shopping cart icon with item count badge */
             <button className="p-2 hover:text-gold transition-colors relative">
               <ShoppingCart className="w-5 h-5" />
               <span className="absolute -top-1 -right-1 w-4 h-4 bg-gold text-vintage-dark text-xs rounded-full flex items-center justify-center font-bold">
@@ -107,9 +73,6 @@ export default function Navbar() {
               </span>
             </button>
 
-            /* ============================================
-               MOBILE MENU BUTTON - Visible only on mobile
-               ============================================ */
             <button
               className="md:hidden p-2"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -119,12 +82,8 @@ export default function Navbar() {
           </div>
         </div>
 
-        /* ============================================
-           MOBILE MENU - Collapsible navigation
-           ============================================ */
         {isMenuOpen && (
           <div className="md:hidden border-t border-wine-burgundy/30 py-4">
-            /* Mobile search form */
             <form onSubmit={handleSearch} className="mb-4">
               <div className="relative">
                 <input
@@ -136,7 +95,6 @@ export default function Navbar() {
                 />
               </div>
             </form>
-            /* Mobile navigation links */
             <div className="flex flex-col space-y-3">
               <Link href="/products" className="nav-link py-2" onClick={() => setIsMenuOpen(false)}>
                 All Products

@@ -1,44 +1,22 @@
 'use client';
 
-/* ============================================
-   NEXT.JS & REACT - Routing and hooks
-   ============================================ */
 import Link from 'next/link';
-
-/* ============================================
-   LUCIDE REACT - Icon library
-   ============================================ */
 import { ArrowRight, Wine, Beer, GlassWater } from 'lucide-react';
-
-/* ============================================
-   FRAMER MOTION - Animation library
-   ============================================ */
 import { motion, useScroll, useTransform } from 'framer-motion';
-
-/* ============================================
-   REACT HOOKS
-   ============================================ */
 import { useRef } from 'react';
 
-/* ============================================
-   HERO SECTION COMPONENT - Main homepage banner
-   ============================================ */
 export default function HeroSection() {
-  /* Reference for scroll tracking */
   const containerRef = useRef(null);
   
-  /* Scroll progress for parallax effects */
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
   });
 
-  /* Transform values for parallax animation */
   const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  /* Feature icons configuration */
   const features = [
     { icon: Wine, label: 'Premium Wines', color: 'text-wine-burgundy' },
     { icon: Beer, label: 'Craft Beers', color: 'text-amber-600' },
@@ -46,35 +24,83 @@ export default function HeroSection() {
   ];
 
   return (
-    /* Hero section container with min height */
     <section ref={containerRef} className="relative min-h-[90vh] flex items-center justify-center overflow-hidden pt-20">
       
-      /* ============================================
-         BACKGROUND LAYERS
-         ============================================ */
-      /* Background pattern overlay */
       <div className="absolute inset-0 bg-vintage-pattern opacity-5" />
       
-      /* Gradient background */
       <div className="absolute inset-0 bg-gradient-to-b from-vintage-dark via-wine-burgundy/10 to-vintage-dark" />
 
-      /* ============================================
-         PARALLAX DECORATIVE ELEMENTS
-         ============================================ */
-      /* Gold blur orb - moves with scroll */
       <motion.div 
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, 100]) }}
         className="absolute top-20 left-10 w-64 h-64 bg-gold/5 rounded-full blur-3xl" 
       />
-      /* Burgundy blur orb - moves opposite direction */
+
       <motion.div 
         style={{ y: useTransform(scrollYProgress, [0, 1], [0, -80]) }}
         className="absolute bottom-20 right-10 w-96 h-96 bg-wine-burgundy/10 rounded-full blur-3xl" 
       />
 
-      /* ============================================
-         FLOATING PARTICLES - Decorative animation
-         ============================================ */
+      <motion.div
+        initial={{ opacity: 0, rotateY: -15, x: -50 }}
+        animate={{ opacity: 1, rotateY: 0, x: 0 }}
+        transition={{ duration: 1, delay: 0.5 }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -50]) }}
+        className="absolute left-[5%] top-1/2 -translate-y-1/2 hidden lg:block perspective-1000"
+      >
+        <motion.div
+          animate={{
+            y: [0, -20, 0],
+            rotateY: [0, 5, 0],
+            rotateX: [0, 2, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="relative w-48 h-72"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-wine-burgundy/80 to-wine-burgundy/20 rounded-2xl backdrop-blur-sm border border-gold/20 shadow-2xl transform rotate-6" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Wine className="w-24 h-24 text-gold/60" />
+          </div>
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-vintage-dark/80 px-4 py-2 rounded-full border border-gold/30">
+            <span className="text-gold text-xs uppercase tracking-wider">Premium Wine</span>
+          </div>
+        </motion.div>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, rotateY: 15, x: 50 }}
+        animate={{ opacity: 1, rotateY: 0, x: 0 }}
+        transition={{ duration: 1, delay: 0.7 }}
+        style={{ y: useTransform(scrollYProgress, [0, 1], [0, -30]) }}
+        className="absolute right-[5%] top-1/2 -translate-y-1/2 hidden lg:block perspective-1000"
+      >
+        <motion.div
+          animate={{
+            y: [0, -15, 0],
+            rotateY: [0, -5, 0],
+            rotateX: [0, -2, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+          className="relative w-48 h-72"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-amber-700/80 to-amber-700/20 rounded-2xl backdrop-blur-sm border border-amber-500/20 shadow-2xl transform -rotate-6" />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <Beer className="w-24 h-24 text-amber-400/70" />
+          </div>
+          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 bg-vintage-dark/80 px-4 py-2 rounded-full border border-amber-500/30">
+            <span className="text-amber-400 text-xs uppercase tracking-wider">Craft Beer</span>
+          </div>
+        </motion.div>
+      </motion.div>
+
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
@@ -97,16 +123,10 @@ export default function HeroSection() {
         />
       ))}
 
-      /* ============================================
-         MAIN CONTENT - Animated container
-         ============================================ */
       <motion.div 
         style={{ y, opacity, scale }}
         className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 text-center"
       >
-        /* ============================================
-           TAGLINE - Brand subtitle
-           ============================================ */
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -116,9 +136,6 @@ export default function HeroSection() {
           Est. 2024 • Premium Selection
         </motion.p>
 
-        /* ============================================
-           MAIN HEADING - Hero title with gradient
-           ============================================ */
         <motion.h1 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -130,9 +147,6 @@ export default function HeroSection() {
           Flavors
         </motion.h1>
 
-        /* ============================================
-           SUBHEADING - Description text
-           ============================================ */
         <motion.p 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -143,21 +157,16 @@ export default function HeroSection() {
           from the world&apos;s finest vineyards and distilleries.
         </motion.p>
 
-        /* ============================================
-           CALL TO ACTION BUTTONS
-           ============================================ */
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.8 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16"
         >
-          /* Primary button - Browse products
           <Link href="/products" className="vintage-button flex items-center gap-2">
             Browse Collection
             <ArrowRight className="w-5 h-5" />
           </Link>
-          /* Secondary button - Featured wines
           <Link 
             href="/featured" 
             className="px-6 py-3 font-accent uppercase tracking-wider border border-gold/30 text-vintage-cream rounded hover:border-gold hover:text-gold transition-all duration-300"
@@ -166,9 +175,6 @@ export default function HeroSection() {
           </Link>
         </motion.div>
 
-        /* ============================================
-           STATISTICS - Key metrics display
-           ============================================ */
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -194,9 +200,6 @@ export default function HeroSection() {
           ))}
         </motion.div>
 
-        /* ============================================
-           FEATURE ICONS - Product category preview
-           ============================================ */
         <motion.div 
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
